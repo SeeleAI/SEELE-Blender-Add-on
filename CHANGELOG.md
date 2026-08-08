@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.2.3 - 2026-08-08
+
+- Changed all user-facing add-on interface text to English.
+
+## 0.2.2 - 2026-08-08
+
+- Added a reproducible public release package.
+- Embedded exact SEELE Web Origins, download hosts and loopback port at build time.
+- Removed URL, host, port, cache and legacy protocol fields from user preferences.
+- Added a simplified Chinese user interface and explicit build-channel labeling.
+
 ## 0.2.1 - 2026-08-07
 
 - Made `sha256` and `sizeBytes` compatibility-optional: supplied values remain strict, while missing metadata produces warnings and receiver hard limits still apply.

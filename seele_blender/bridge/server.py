@@ -30,6 +30,8 @@ class RuntimeConfig:
     importer_readiness: tuple
     legacy_enabled: bool = False
     legacy_consume_url: str = ""
+    build_channel: str = "public"
+    build_label: str = "Public Release"
 
 
 class BridgeServer(ThreadingHTTPServer):
@@ -96,6 +98,7 @@ class Handler(BaseHTTPRequestHandler):
                     "receiverId": config.receiver_id,
                     "receiverVersion": config.addon_version,
                     "hostVersion": config.blender_version,
+                    "buildChannel": config.build_channel,
                     "protocols": protocols,
                     "capabilities": {
                         "formats": list(config.formats),

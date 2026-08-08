@@ -1,4 +1,4 @@
-# SEELE Transfer for Blender 0.2.1
+# SEELE Transfer for Blender 0.2.3
 
 Blender 4.x 的本地 DCC receiver。插件接收 Code4Agent Web 投递的 `dcc-transfer.v1` direct manifest，在后台下载和校验文件，并在 Blender 主线程调用原生 importer。
 
@@ -7,25 +7,31 @@ Blender 4.x 的本地 DCC receiver。插件接收 Code4Agent Web 投递的 `dcc-
 ## 安装、升级与卸载
 
 1. 在 Blender 打开 **Edit → Preferences → Add-ons → Install from Disk**。
-2. 选择 `seele_blender-0.2.1.zip` 并启用 **SEELE Transfer**。
+2. 选择 `dist/seele-blender-0.2.3-public.zip` 并启用 **SEELE Transfer**。
 3. 在 3D View 按 `N`，打开 **SEELE** 页签查看 receiver 状态。
 
-升级时先停用并删除旧插件，重启 Blender，再安装 0.2.1。卸载插件不会自动删除下载缓存；请在卸载前使用 **Clear Cache**，或在确认 sentinel 后手工处理缓存。
+升级时先停用并删除旧插件，完全退出 Blender，再安装新包。卸载插件不会自动删除下载缓存；请在卸载前使用 **Clear Cache**，或在确认 sentinel 后手工处理缓存。
 
 经典 Add-on ZIP 支持 Blender 4.0+。仓库中的 `blender_manifest.toml` 面向 Blender 4.2+ Extensions 打包流程。
 
-## 配置
+## 安装后直接使用
 
-Add-on Preferences 中保留以下正式配置：
+用户无需填写网址、端口、下载域名或缓存目录。插件已经内置安全配置：
 
-- **Production / Feature / Test Origin**：精确 `scheme://host[:port]`，禁止 `*`、credentials、path、query 和 fragment。
-- **Download Host Allowlist**：逗号分隔的精确 `host` 或 `host:port`，禁止通配符。
-- **Cache Directory**：默认 `~/.seele/blender-cache`。插件创建 `.seele-blender-cache` sentinel。
-- **Bridge Port**：默认 `9878`；固定监听 `127.0.0.1`，无法改为 `0.0.0.0`。
+- 正式包只接受 `https://www.seeles.ai`。
+- 插件只允许从 `static.seeles.ai` 和 `agent-workspace-1368252780.cos.na-ashburn.myqcloud.com` 下载。
+- Host 必须精确匹配，不使用 `*.seeles.ai` 或 `*.myqcloud.com`。
+- Bridge 固定监听 `127.0.0.1:9878`。
+- 缓存固定使用 `~/.seele/blender-cache`，并由 sentinel 安全管理。
+- Legacy Consume 和开发 Origin 始终关闭。
 
-修改网络配置后需要 Stop/Start Bridge。正式主链路不需要配置 BFF URL。
+最终用户流程：安装并启用插件 → 打开 SEELE 网站 → 点击“发送到 Blender”。
 
-开发 Origin 和旧 `blender-transfer.v1` Consume 流程均默认关闭。Legacy 仅用于 0.2.x 迁移联调，并计划在 0.3.0 删除。
+构建正式安装包：
+
+```powershell
+python tools/build_packages.py
+```
 
 ## 统一 Receiver API
 
@@ -79,7 +85,7 @@ Direct manifest 投递：
 - 下载写入独立 `<transferId>/<instanceId>/`，经 size/hash 验证后原子替换 `.part`。
 - 网络和下载在线程中执行；所有 `bpy` 操作仅由主线程 timer 执行。
 - 导入前记录 Blender datablock snapshot。失败或导入中取消时只回滚本次新增对象、Collection、Mesh、Material、Image、Armature 和 Action。
-- 成功资产进入独立 `SEELE_<name>` Collection；自动聚焦只通过 Sidebar 的 **Frame** 按钮执行。
+- 成功资产进入独立 `SEELE_<name>` Collection；自动聚焦只通过 Sidebar 的 **Frame Model** 按钮执行。
 - STL 只使用 manifest 的 `unitScaleMeters`，不修改 Scene 全局单位。
 
 详细隐私与网络行为见 [docs/PRIVACY_AND_NETWORK.md](docs/PRIVACY_AND_NETWORK.md)，故障处理见 [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)。

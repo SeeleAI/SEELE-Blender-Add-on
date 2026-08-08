@@ -1,7 +1,7 @@
 bl_info = {
     "name": "SEELE Transfer",
     "author": "SEELE",
-    "version": (0, 2, 1),
+    "version": (0, 2, 3),
     "blender": (4, 0, 0),
     "location": "3D View > Sidebar > SEELE",
     "description": "Securely receive and import SEELE assets",

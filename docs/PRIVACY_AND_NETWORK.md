@@ -1,6 +1,8 @@
 # Privacy and network behavior
 
-SEELE Transfer opens an HTTP receiver only on `127.0.0.1` at the configured port. It never binds a LAN-facing address. Browser requests require an exact configured Origin and a short-lived challenge bound to that Origin and receiver installation.
+SEELE Transfer opens an HTTP receiver only on fixed loopback address `127.0.0.1:9878`. It never binds a LAN-facing address. Browser requests require an exact build-time SEELE Origin and a short-lived challenge bound to that Origin and receiver installation.
+
+The release package embeds the exact production SEELE Origin and download hosts. End users cannot add wildcard Origins, broaden the host allowlist, enable development Origins or turn on the legacy Consume protocol. Feature and test Origins are not included.
 
 The plugin receives short-lived HTTPS download grants inside a direct manifest. Grants are held in memory while the transfer is active and are not included in public status responses, diagnostics, default HTTP logs or Blender UI. The plugin does not store SEELE cookies, API keys, shared production secrets or login credentials.
 

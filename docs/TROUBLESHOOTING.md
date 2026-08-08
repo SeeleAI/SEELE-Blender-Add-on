@@ -2,15 +2,15 @@
 
 ## Bridge shows Error
 
-Another process may be using port 9878, or the cache/network configuration may be invalid. Change the port if required, then Stop/Start Bridge. The receiver always binds `127.0.0.1`.
+Another Blender process may be using port 9878. Fully close other Blender processes, then click Stop/Start or restart Blender. The receiver always binds `127.0.0.1:9878`; users do not configure the port.
 
 ## Origin blocked
 
-Enter the exact Web Origin in the matching Production, Feature or Test field. Include the scheme and non-default port. Do not add a path or wildcard. Restart Bridge after changes.
+The public package accepts only the production SEELE Origin. Feature and test environments are not included, and users cannot expand the Origin allowlist.
 
 ## Download host blocked
 
-Add only the exact hostname, or `hostname:port` for a non-default HTTPS port, used by the BFF download grant. Redirect destinations must also be explicitly allowed.
+The allowlist is embedded and cannot be changed by users. Downloads must resolve to `static.seeles.ai` or `agent-workspace-1368252780.cos.na-ashburn.myqcloud.com`; redirect destinations are checked again. Fix the Server URL rewrite rather than asking users to weaken the allowlist.
 
 ## Challenge expired or replayed
 
@@ -30,4 +30,4 @@ Check `/v1/health` or the Sidebar importer readiness. The advertised format list
 
 ## Diagnostics
 
-Use **Copy Diagnostic Summary** in the Sidebar. The copied JSON is designed to omit signed URLs, tokens and local paths.
+Use **Copy Diagnostics** in the Sidebar. The copied JSON is designed to omit signed URLs, tokens and local paths.

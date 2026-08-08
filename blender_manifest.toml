@@ -1,6 +1,6 @@
 schema_version = "1.0.0"
 id = "seele_transfer"
-version = "0.2.1"
+version = "0.2.3"
 name = "SEELE Transfer"
 tagline = "Securely receive and import SEELE DCC transfers"
 maintainer = "SEELE"
