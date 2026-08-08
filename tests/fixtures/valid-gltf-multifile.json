@@ -1,0 +1,19 @@
+{
+  "version": "dcc-transfer.v1",
+  "transferId": "22222222-2222-4222-8222-222222222222",
+  "target": {"dcc": "blender", "format": "gltf"},
+  "receiverId": "fixture-receiver",
+  "displayName": "scene",
+  "entryFileId": "model",
+  "coordinateSystem": "right-handed-y-up",
+  "unitScaleMeters": 1,
+  "files": [
+    {"id": "model", "kind": "MODEL", "format": "gltf", "path": "model/scene.gltf", "downloadUrl": "https://assets.example.com/model", "contentType": "model/gltf+json", "sha256": "1111111111111111111111111111111111111111111111111111111111111111", "sizeBytes": 100},
+    {"id": "buffer", "kind": "AUXILIARY", "format": "bin", "path": "model/scene.bin", "downloadUrl": "https://assets.example.com/buffer", "contentType": "application/octet-stream", "sha256": "2222222222222222222222222222222222222222222222222222222222222222", "sizeBytes": 200},
+    {"id": "texture", "kind": "TEXTURE", "format": "png", "path": "model/textures/base.png", "downloadUrl": "https://assets.example.com/texture", "contentType": "image/png", "sha256": "3333333333333333333333333333333333333333333333333333333333333333", "sizeBytes": 300}
+  ],
+  "materials": [],
+  "limits": {"maxFiles": 128, "maxTotalBytes": 1073741824},
+  "createdAt": "2099-01-01T00:00:00Z",
+  "expiresAt": "2099-01-01T00:10:00Z"
+}

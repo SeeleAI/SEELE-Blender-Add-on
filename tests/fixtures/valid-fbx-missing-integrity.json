@@ -1,0 +1,23 @@
+{
+  "version": "dcc-transfer.v1",
+  "transferId": "33333333-3333-4333-8333-333333333333",
+  "target": {"dcc": "blender", "format": "fbx"},
+  "receiverId": "fixture-receiver",
+  "canvasId": "canvas_legacy",
+  "displayName": "legacy-character",
+  "entryFileId": "model",
+  "coordinateSystem": "right-handed-y-up",
+  "unitScaleMeters": 1,
+  "files": [{
+    "id": "model",
+    "kind": "MODEL",
+    "format": "fbx",
+    "path": "legacy-character.fbx",
+    "downloadUrl": "https://assets.example.com/files/model?token=fixture",
+    "contentType": "application/octet-stream"
+  }],
+  "materials": [],
+  "limits": {"maxFiles": 128, "maxTotalBytes": 1073741824},
+  "createdAt": "2099-01-01T00:00:00Z",
+  "expiresAt": "2099-01-01T00:10:00Z"
+}

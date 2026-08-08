@@ -1,0 +1,15 @@
+schema_version = "1.0.0"
+id = "seele_transfer"
+version = "0.2.1"
+name = "SEELE Transfer"
+tagline = "Securely receive and import SEELE DCC transfers"
+maintainer = "SEELE"
+type = "add-on"
+tags = ["Import-Export", "Pipeline"]
+blender_version_min = "4.2.0"
+license = ["SPDX:LicenseRef-SEELE-Proprietary"]
+
+[permissions]
+network = "Receive localhost Web requests and download short-lived asset files"
+files = "Write and manage the configured SEELE transfer cache"
+clipboard = "Copy a sanitized diagnostic summary on explicit user action"

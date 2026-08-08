@@ -1,0 +1,1 @@
+{"mutation": "files.0.downloadUrl", "value": "https://evil.example/file", "expectedCode": "DOWNLOAD_HOST_BLOCKED"}

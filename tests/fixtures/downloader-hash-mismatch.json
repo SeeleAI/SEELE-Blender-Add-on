@@ -1,0 +1,1 @@
+{"description": "Use valid-minimal-fbx.json with bytes whose SHA-256 is not the declared digest", "expectedCode": "DOWNLOAD_HASH_MISMATCH"}
