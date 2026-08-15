@@ -1,140 +1,123 @@
-# SEELE Transfer for Blender
+# Seele-art-blender
 
-SEELE Transfer is a Blender AI add-on companion that imports 3D assets from SEELE Workspace into Blender through a secure, one-click transfer workflow. It is a transfer and import bridge—not an AI model generator running inside Blender.
+<p align="center"><strong>A secure Blender-side receiver for importing validated 3D asset transfers from Seele Web.</strong></p>
 
-![Blender](https://img.shields.io/badge/Blender-4.0%2B-E87D0D?logo=blender&logoColor=white)
-![Version](https://img.shields.io/badge/Version-0.2.3-4c8bf5)
-![License](https://img.shields.io/badge/License-SEELE%20Proprietary-5c2d91)
+<p align="center">
+  <a href="https://www.blender.org/"><img src="https://img.shields.io/badge/Blender-4.0%2B-E87D0D?style=for-the-badge&amp;logo=blender&amp;logoColor=white" alt="Blender 4.0 or newer"></a>
+  <a href="https://github.com/SeeleAI/Seele-art-blender/releases"><img src="https://img.shields.io/badge/Public%20Release-0.2.3-4C8BF5?style=for-the-badge" alt="Public Release 0.2.3"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Proprietary-5C2D91?style=for-the-badge" alt="SEELE proprietary license"></a>
+</p>
 
-The add-on connects the SEELE website to Blender. It receives an asset transfer, downloads and verifies the files, imports them with Blender's native tools, and places the result in a dedicated collection—without asking users to configure URLs, ports, download hosts, or cache paths.
+<p align="center">
+  <a href="https://www.seeles.ai/features/tools/ai-3d-model-generator-entry">Create with Seele AI 3D</a> &middot;
+  <a href="#install-the-production-package">Install</a> &middot;
+  <a href="#quick-start">Quick start</a> &middot;
+  <a href="docs/PRIVACY_AND_NETWORK.md">Privacy and network behavior</a>
+</p>
 
-For browser-based AI 3D model generation without installing the Blender add-on, start with [AI 3D Model Generator: Start Creating 3D Assets | SEELE AI](https://www.seeles.ai/features/tools/ai-3d-model-generator-entry). Once an asset is available in SEELE Workspace, this add-on provides the validated path for sending a Workspace FBX asset into Blender.
+<p align="center">
+  Send an asset from Seele Workspace to an open Blender session, verify its transfer, and import it into a dedicated collection.
+</p>
 
-## What the Add-on Does
+> **Scope.** This repository contains the Blender receiver and importer. It does not run an AI model generator inside Blender, provide a standalone asset browser, or implement the Seele Web services that create and authorize transfers.
 
-- Receives **Send to Blender** transfers from the production SEELE website.
-- Downloads transferred files in the background and verifies supplied file sizes and SHA-256 checksums.
-- Imports assets with Blender's available native FBX, GLB/glTF, or STL importer.
-- Keeps each imported asset organized in its own `SEELE_<name>` collection.
-- Tracks transfer, verification, and import progress in the SEELE sidebar.
-- Cancels an in-progress transfer and rolls back incomplete imports.
-- Frames a completed import for inspection and clears downloaded transfer files on request.
+## Why Seele-art-blender?
 
-The complete product-validated workflow is currently **SEELE Workspace FBX to Blender**. GLB, glTF, and STL importer support is capability-based and depends on the running Blender installation; those formats do not yet have complete SEELE Web end-to-end validation.
+- **Keep the workflow in Blender.** A completed import is organized in its own `SEELE_<name>` collection and can be selected and framed from the SEELE sidebar.
+- **Use a narrow local receiver.** The add-on listens only on `127.0.0.1:9878`; it never binds a LAN-facing address.
+- **Validate before import.** The receiver checks transfer identity and expiry, exact origins and download hosts, HTTPS URLs, safe relative paths, declared sizes, and supplied SHA-256 digests.
+- **Stay informed and in control.** The sidebar reports transfer progress, supports cancellation, can retry eligible importer failures after files were verified, and clears only sentinel-managed cache data.
 
-## Who It Is For
-
-SEELE Transfer supports a 3D asset workflow in which artists, designers, and developers:
-
-1. Create or choose a 3D asset on SEELE.
-2. Send the asset from SEELE Workspace to an open Blender session.
-3. Inspect the imported collection, materials, textures, scale, and hierarchy.
-4. Continue editing, scene assembly, rendering, or other Blender work with Blender's own tools.
-
-The repository contains the Blender receiver only. SEELE web services, AI 3D model generation, and other DCC integrations are maintained separately.
+The product-validated end-to-end path is currently **Seele Workspace FBX → Blender**. The add-on also supports GLB, glTF, and STL when their native import operators are available in the running Blender installation; those formats have not completed the same Seele Web end-to-end validation.
 
 ## Requirements
 
-- Blender 4.0 or newer for the classic add-on ZIP.
-- Access to the SEELE website at [seeles.ai](https://www.seeles.ai).
-- An internet connection for downloading transferred assets.
-- Localhost access to `127.0.0.1:9878` for communication between SEELE and Blender.
+- Blender **4.0 or newer** for the classic add-on ZIP.
+- Blender **4.2 or newer** for the Extensions manifest/package path.
+- Access to the production Seele website at [seeles.ai](https://www.seeles.ai).
+- An internet connection to download transferred asset files.
+- Localhost access to `127.0.0.1:9878` between the browser and Blender.
 
-This package is a Blender add-on and does not become part of exported assets or runtime builds.
+The package is a Blender Editor add-on. It does not become a dependency of exported assets or runtime builds.
 
-## Installation
+## Install the production package
 
-Download the official package from [GitHub Releases](https://github.com/SeeleAI/SEELE-Blender-Add-on/releases):
+The current public production build is **0.2.3**. Download it from [GitHub Releases](https://github.com/SeeleAI/Seele-art-blender/releases) using this package name:
 
 ```text
 seele-blender-0.2.3-public.zip
 ```
 
-1. In Blender, open **Edit > Preferences > Add-ons**.
+1. In Blender, open **Edit → Preferences → Add-ons**.
 2. Select **Install from Disk**.
-3. Choose the downloaded ZIP file.
+3. Choose the downloaded ZIP.
 4. Enable **SEELE Transfer**.
+5. Open the 3D View sidebar with `N` and select the **SEELE** tab.
 
-To upgrade, disable and remove the previous version, exit Blender completely, and install the new package. If you no longer need downloaded files, select **Clear Cache** before removing the add-on.
+To upgrade, disable and remove the previous version, exit Blender completely, then install the new package. If you no longer need downloaded transfer files, use **Clear Cache** before removing the add-on.
 
-## Quick Start
+## Quick start
 
-1. Start Blender and open the **SEELE** tab in the 3D View sidebar (`N`).
-2. Confirm that the receiver status is ready.
-3. Open SEELE, choose an asset, and select **Send to Blender**.
-4. Wait for the transfer to complete, then find the imported asset in its `SEELE_<name>` collection.
+1. Start Blender and confirm that the **SEELE** sidebar reports the receiver as ready.
+2. Create or choose a 3D asset in Seele. For browser-based generation, start at the [Seele AI 3D Model Generator](https://www.seeles.ai/features/tools/ai-3d-model-generator-entry).
+3. In a supported Seele Workspace flow, select **Send to Blender**.
+4. Keep Blender open while the add-on downloads, verifies, and imports the transfer.
+5. Inspect the resulting `SEELE_<name>` collection, including its geometry, materials, textures, scale, and hierarchy.
 
-## How the SEELE-to-Blender Workflow Works
+## How the transfer works
 
 ```mermaid
 flowchart LR
-    A["Choose an asset in SEELE Workspace"]
-    B["Send the asset to Blender"]
-    C["Blender receives the transfer"]
-    D["Files are downloaded and verified"]
-    E["Blender imports the asset"]
+    A["Choose an asset in Seele Workspace"]
+    B["Send to Blender"]
+    C["Local receiver accepts the manifest"]
+    D["Files download and validate"]
+    E["Blender imports on its main thread"]
     F["Asset appears in a SEELE collection"]
 
     A --> B --> C --> D --> E --> F
 ```
 
-The add-on exposes a receiver on the fixed loopback address `127.0.0.1:9878`. SEELE sends a short-lived transfer manifest to that receiver; the add-on downloads the declared asset files from embedded allowed hosts, validates the manifest and available integrity metadata, and queues the import. Download work runs in the background, while Blender operations run on Blender's main thread.
+The add-on exposes a fixed loopback HTTP receiver at `127.0.0.1:9878`. The production Seele origin requests a short-lived, single-use challenge and sends a `dcc-transfer.v1` manifest bound to that receiver installation. File downloads run in background workers; Blender API operations are queued onto Blender's main thread.
 
-Technical privacy, networking, and validation details are documented in [Privacy and Network Behavior](docs/PRIVACY_AND_NETWORK.md).
+The receiver provides health/capability discovery, transfer status, cancellation, and eligible import retry. It does not accept user-configured origins, download hosts, ports, development origins, or the disabled legacy Consume flow in the public build.
 
-## Compatibility
+## Compatibility and validation
 
-| Item | Support |
-|---|---|
-| Blender | 4.0 or newer with the classic add-on ZIP |
-| Validated workflow | SEELE Workspace FBX to Blender |
-| Additional importers | GLB, glTF, and STL when available in Blender; Web E2E validation is pending |
-| Installation type | Blender Editor add-on |
-| Blender Extensions packaging | Blender 4.2 or newer |
+| Area | Current support |
+| --- | --- |
+| Classic add-on ZIP | Blender 4.0+ |
+| Extensions manifest | Blender 4.2+ (`blender_manifest.toml`) |
+| Fully validated product path | Seele Workspace FBX → Blender |
+| Additional capability-based formats | GLB, glTF, STL when the corresponding Blender importer is available |
+| Import location | Dedicated `SEELE_<name>` collection |
+| Materials | Native importer behavior; FBX materials and external textures are best-effort |
+| Runtime impact | Editor-only receiver/importer; no exported-runtime dependency |
 
-Only Workspace FBX is currently validated across the complete SEELE-to-Blender workflow. The add-on can detect other native Blender importers, but their availability does not imply completed end-to-end product validation.
+Importer availability is reported dynamically by the local receiver. A format appearing in that capability response means the Blender operator is available; it does **not** mean Seele Web end-to-end validation is complete for that format.
 
-## FAQ
+## Security and privacy boundary
 
-### Is SEELE Transfer an AI 3D model generator inside Blender?
+- The HTTP server binds only to `127.0.0.1:9878`.
+- The public build accepts the exact production origin `https://www.seeles.ai`; wildcards and user-expanded origin lists are not supported.
+- Download URLs must use HTTPS and match the embedded host allowlist. Redirect and final destinations are checked again.
+- Challenges expire after 60 seconds, are single-use, and are bound to the exact origin and receiver installation.
+- Manifests are constrained to 128 files and 1 GiB per file/transfer. Safe canonical relative paths are required.
+- When `sizeBytes` or `sha256` is supplied, it is strictly verified. Missing integrity metadata may be accepted for compatibility with a visible warning; hard receiver byte limits still apply.
+- Signed download grants remain in memory during transfer and are excluded from public status, copied diagnostics, default HTTP logs, and Blender UI.
+- Cache cleanup is limited to the managed cache containing the expected `.seele-blender-cache` sentinel and rejects protected or symlinked locations.
 
-No. SEELE Transfer is the Blender-side receiver and importer for assets sent from SEELE. AI 3D model generation is a separate web workflow available through the [SEELE AI 3D Model Generator](https://www.seeles.ai/features/tools/ai-3d-model-generator-entry).
-
-### Which workflow is fully validated?
-
-SEELE Workspace FBX to Blender is the currently validated end-to-end workflow. The add-on can advertise GLB, glTF, and STL only when their native import operators are available in the running Blender installation, but SEELE Web validation for those formats is pending.
-
-### Does the add-on require manual server or cache configuration?
-
-No. The public build uses the production SEELE origin, embedded download hosts, a fixed loopback receiver at `127.0.0.1:9878`, and a managed cache path.
-
-### Where does an imported asset appear?
-
-The add-on creates a dedicated collection named `SEELE_<name>` and moves the imported objects into it. The SEELE sidebar can select and frame the completed import.
-
-### Does the add-on modify exported assets or runtime builds?
-
-No. It is an editor add-on used to receive and import assets into Blender.
+This boundary does not defend against a malicious native process already running on the same computer. See [Privacy and Network Behavior](docs/PRIVACY_AND_NETWORK.md) for the complete model.
 
 ## Troubleshooting
 
-### The receiver is not ready
+- **Receiver not ready:** fully close other Blender processes that may already use port `9878`, then restart Blender or the receiver.
+- **Send to Blender does nothing:** confirm the sidebar is ready and that local security software permits loopback traffic on port `9878`.
+- **Format unavailable:** check the sidebar importer readiness. GLB, glTF, and STL depend on the installed Blender operators.
+- **Import warning:** inspect materials, textures, scale, and hierarchy before continuing; FBX material and external-texture handling is best-effort.
+- **Download or integrity failure:** create a new transfer from Seele. Local retry is reserved for eligible importer failures after all files were verified.
 
-Make sure SEELE Transfer is enabled and keep Blender open. In the 3D View, press `N`, open the **SEELE** tab, and check the displayed receiver status. Restart Blender after upgrading the add-on.
-
-### Send to Blender does nothing
-
-Confirm that the sidebar reports the receiver as ready. Check whether a firewall or security tool is blocking localhost port `9878`, then retry from [seeles.ai](https://www.seeles.ai).
-
-### The file format is unavailable
-
-Workspace FBX is the currently validated workflow. Importer availability for GLB, glTF, and STL depends on the installed Blender version and does not yet indicate full SEELE Web support.
-
-### The import completes with warnings
-
-The imported result may still be usable. Review the transfer message in the SEELE sidebar and inspect materials, textures, scale, and object hierarchy before continuing your work.
-
-For additional help, see the [Troubleshooting Guide](docs/TROUBLESHOOTING.md).
+For detailed recovery steps, read the [Troubleshooting Guide](docs/TROUBLESHOOTING.md).
 
 ## Documentation
 
@@ -144,18 +127,32 @@ For additional help, see the [Troubleshooting Guide](docs/TROUBLESHOOTING.md).
 
 ## Development
 
-Build the production installation package:
+Build the reproducible public package:
 
-```powershell
+```bash
 python tools/build_packages.py
 ```
 
-Run the unit tests:
+Run the unit suite:
 
-```powershell
+```bash
 python -m unittest discover -s tests/unit -v
 ```
 
+A Blender headless import check can be run with a suitable local fixture:
+
+```bash
+blender --background --factory-startup --python tests/blender_integration/run_import.py -- fixture.fbx
+```
+
+The headless fixture requires Blender and an actual model file; the Python unit suite does not replace real browser-to-Blender product validation.
+
+## Releases and support
+
+[GitHub Releases](https://github.com/SeeleAI/Seele-art-blender/releases) is the download location for public production packages. Review [CHANGELOG.md](CHANGELOG.md) for version history.
+
+Report defects through [GitHub Issues](https://github.com/SeeleAI/Seele-art-blender/issues). Include the Blender version, add-on version, transfer result, and sanitized diagnostics—never signed URLs, tokens, credentials, or local paths.
+
 ## License
 
-Copyright (c) 2026 SEELE. All rights reserved. This project and its binary packages are proprietary unless SEELE provides a separate written license agreement. See [LICENSE](LICENSE) for details.
+Copyright © 2026 SEELE. All rights reserved. This project and its binary packages are proprietary unless SEELE provides a separate written license agreement. See [LICENSE](LICENSE) for details.
