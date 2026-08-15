@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="480" viewBox="0 0 1440 480" role="img" aria-labelledby="title desc">
+  <title id="title">Seele Art Blender import flow</title>
+  <desc id="desc">A validated localhost transfer moves FBX assets and textures from Seele Web through a local bridge into a Blender scene.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0b1020"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#06b6d4"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000000" flood-opacity=".28"/>
+    </filter>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10Z" fill="#67e8f9"/>
+    </marker>
+  </defs>
+  <rect width="1440" height="480" rx="28" fill="url(#background)"/>
+  <circle cx="116" cy="74" r="180" fill="#7c3aed" opacity=".16"/>
+  <circle cx="1340" cy="410" r="230" fill="#06b6d4" opacity=".13"/>
+  <text x="720" y="70" fill="#f8fafc" font-family="Segoe UI, Arial, sans-serif" font-size="30" font-weight="700" text-anchor="middle">From Seele Web to your local Blender scene</text>
+  <text x="720" y="106" fill="#94a3b8" font-family="Segoe UI, Arial, sans-serif" font-size="18" text-anchor="middle">Validated localhost import path for FBX assets and textures</text>
+  <path d="M430 266H590" stroke="#67e8f9" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <path d="M850 266H1010" stroke="#67e8f9" stroke-width="5" stroke-linecap="round" marker-end="url(#arrow)"/>
+  <g filter="url(#shadow)">
+    <rect x="120" y="176" width="310" height="182" rx="22" fill="#172554" stroke="#6366f1" stroke-width="2"/>
+    <rect x="155" y="211" width="74" height="74" rx="19" fill="url(#accent)"/>
+    <path d="M177 234h30v8h-30zm0 16h30v8h-30zm0 16h20v8h-20z" fill="#ffffff"/>
+    <text x="252" y="239" fill="#f8fafc" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Seele Web</text>
+    <text x="252" y="270" fill="#cbd5e1" font-family="Segoe UI, Arial, sans-serif" font-size="17">Ready transfer manifest</text>
+    <text x="155" y="326" fill="#93c5fd" font-family="Segoe UI, Arial, sans-serif" font-size="15">FBX · textures · HTTPS URLs</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="590" y="176" width="260" height="182" rx="22" fill="#0f3a46" stroke="#22d3ee" stroke-width="2"/>
+    <circle cx="650" cy="248" r="37" fill="#083344" stroke="#67e8f9" stroke-width="2"/>
+    <path d="M633 249l12 12l23-27" fill="none" stroke="#67e8f9" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="702" y="239" fill="#f8fafc" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Local bridge</text>
+    <text x="702" y="270" fill="#cbd5e1" font-family="Segoe UI, Arial, sans-serif" font-size="17">127.0.0.1:9878</text>
+    <text x="620" y="326" fill="#a5f3fc" font-family="Segoe UI, Arial, sans-serif" font-size="15">Origin · expiry · hash validation</text>
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="1010" y="176" width="310" height="182" rx="22" fill="#24203d" stroke="#a78bfa" stroke-width="2"/>
+    <path d="M1053 212h72v72h-72z" fill="#312e81" stroke="#c4b5fd" stroke-width="2"/>
+    <path d="M1069 233h40v30h-40z" fill="none" stroke="#e9d5ff" stroke-width="3"/>
+    <path d="M1078 242h22m-22 10h22" stroke="#e9d5ff" stroke-width="3" stroke-linecap="round"/>
+    <text x="1150" y="239" fill="#f8fafc" font-family="Segoe UI, Arial, sans-serif" font-size="24" font-weight="700">Blender</text>
+    <text x="1150" y="270" fill="#cbd5e1" font-family="Segoe UI, Arial, sans-serif" font-size="17">Scene owns imported assets</text>
+    <text x="1045" y="326" fill="#ddd6fe" font-family="Segoe UI, Arial, sans-serif" font-size="15">SEELE_&lt;name&gt; collection</text>
+  </g>
+</svg>

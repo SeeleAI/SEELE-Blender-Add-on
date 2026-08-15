@@ -21,6 +21,10 @@
 
 > **Scope.** This repository contains the Blender receiver and importer. It does not run an AI model generator inside Blender, provide a standalone asset browser, or implement the Seele Web services that create and authorize transfers.
 
+<p align="center">
+  <img src="docs/images/import-flow.svg" alt="Validated localhost import flow from Seele Web to a Blender scene" width="1200">
+</p>
+
 ## Why Seele-art-blender?
 
 - **Keep the workflow in Blender.** A completed import is organized in its own `SEELE_<name>` collection and can be selected and framed from the SEELE sidebar.
